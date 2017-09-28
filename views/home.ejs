@@ -7,11 +7,15 @@
     <link rel="stylesheet" href="/vendor/normalize-4.1.1.css" type="text/css" />
     <link rel="stylesheet" href="/vendor/border-box.css" type="text/css" />
     <link rel="stylesheet" href="/styles/layout.css" type="text/css" />
+    <link rel="stylesheet" href="/styles/create-poll.css" type="text/css" />
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap-theme.min.css">
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css">
 
-
+    <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="/vendor/jquery-3.0.0.js"></script>
     <script type="text/javascript" src="/scripts/app.js"></script>
+    <script type="text/javascript" src="/scripts/add-option-to-poll.js"></script>
 </head>
 
 <body>
@@ -27,6 +31,23 @@
                 </h1>
                 <h1>Welcome To The Poll Master</h1>
                 <h2>Create a Poll Title!</h2>
+                <br>
+                <br>
+                <br>
+                <br>
+                <div class="form-group">
+                    <h1>Add new option</h1>
+                    <form role="form">
+                        <input type="text" class="form-control" placeholder="add option" name="task">
+                    </form>
+                    <button type="button" class="btn btn btn-primary">Add</button>
+                </div>
+                <div>
+                    <small>Options</small>
+                </div>
+                <ul class="list-unstyled" id="todo"></ul>
+
+
             </div>
             <div class="col">
                 <font color=#f0f1ef>3 of 3</font>
