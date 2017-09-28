@@ -15,7 +15,7 @@ const morgan = require('morgan');
 const knexLogger = require('knex-logger');
 
 const cookieSession = require('cookie-session'); // Use Node.js cookie-session middleware
-const authen = require('./utils/authen-helper'); // Authentication helper
+// const authen = require('./utils/authen-helper'); // Authentication helper
 
 // Seperated Routes for each Resource
 const usersRoutes = require("./routes/users");
@@ -49,12 +49,21 @@ function generateRandomString() {
 
 // Home page
 app.get("/", (req, res) => {
-  const matchedUser = authen.authenUserByEmail(knex, "aaa@aaa.com");
   res.render("index");
 });
 
 app.get("/login", (req, res) => {
-    res.render("login");
+  res.render("login");
+});
+
+app.post("/login", (req, res) => {
+  knex.select("*").from("users").where({email: req.body.email}).then((result) => {
+    if (result.length === 0) {
+      return res.send("You are trying to login with invalid email...")
+    } else {
+      res.redirect('/home');
+    }
+  });
 });
 
 app.get("/home", (req, res) => {
@@ -77,8 +86,6 @@ app.get("/poll", (req, res) => {
 app.post("/home", (req, res) => {
     res.redirect("poll");
 });
-
-
 
 app.listen(PORT, () => {
     console.log("Poll Master is listening on port " + PORT);
