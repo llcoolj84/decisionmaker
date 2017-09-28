@@ -14,6 +14,9 @@ const knex = require("knex")(knexConfig[ENV]);
 const morgan = require('morgan');
 const knexLogger = require('knex-logger');
 
+const cookieSession = require('cookie-session'); // Use Node.js cookie-session middleware
+const authen = require('./utils/authen-helper'); // Authentication helper
+
 // Seperated Routes for each Resource
 const usersRoutes = require("./routes/users");
 
@@ -40,7 +43,8 @@ app.use("/api/users", usersRoutes(knex));
 
 // Home page
 app.get("/", (req, res) => {
-    res.render("index");
+  const matchedUser = authen.authenUserByEmail(knex, "aaa@aaa.com");
+  res.render("index");
 });
 
 app.get("/login", (req, res) => {
