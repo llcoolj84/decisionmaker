@@ -15,6 +15,7 @@ const morgan = require('morgan');
 const knexLogger = require('knex-logger');
 
 const cookieSession = require('cookie-session'); // Use Node.js cookie-session middleware
+app.use(cookieSession({keys: ['thisisTedKey', 'ThisisLHLKey']})); // set secret keys for cookie-session
 // const authen = require('./utils/authen-helper'); // Authentication helper
 
 // Seperated Routes for each Resource
@@ -54,11 +55,22 @@ function generateRandomString() {
 
 // Home page
 app.get("/", (req, res) => {
-  res.render("index");
+  // res.render("index");
+  res.redirect('/login');
 });
 
 app.get("/login", (req, res) => {
-  res.render("login");
+  knex.select("*").from("users").where({id: req.session.user_id})
+  .then((result) => { // If there is cookie
+    if (result.length === 0) {
+      res.render("login");
+    } else {
+      res.redirect('/home');
+    }
+  })
+  .catch((error) => { //Handle no cookie
+    res.render("login");
+  });
 });
 
 app.post("/login", (req, res) => {
@@ -66,6 +78,7 @@ app.post("/login", (req, res) => {
     if (result.length === 0) {
       return res.send("You are trying to login with invalid email...")
     } else {
+      req.session.user_id = result[0].id; // set cookie session
       res.redirect('/home');
     }
   });
@@ -98,6 +111,11 @@ app.get("/poll/abcdef", (req, res) => {
 //Haven't created the POST action yet...
 app.post("/home", (req, res) => {
     res.redirect("home");
+});
+
+app.post("/logout", (req, res) => {
+  req.session = null; // clear cookie session
+  res.redirect("/login");
 });
 
 app.get('*', function(req, res){ // The 404 route
