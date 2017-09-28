@@ -43,8 +43,13 @@ app.use("/api/users", usersRoutes(knex));
 
 //Generate Random String
 function generateRandomString() {
-    randomString = Math.random().toString(36).substring(2, 8);
-    return randomString;
+  const abcset = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"; // 62 characters
+  let randomsix = '';
+
+  for (let i = 0; i < 6; i++) {
+    randomsix = randomsix + abcset[Math.floor(Math.random() * 62)];
+  }
+  return randomsix;
 }
 
 // Home page
@@ -86,15 +91,17 @@ app.post("/poll/:id", (req, res) => {
 
 });
 
-
-
-app.get("/poll", (req, res) => {
+app.get("/poll/abcdef", (req, res) => {
     res.render("poll");
 });
 
 //Haven't created the POST action yet...
 app.post("/home", (req, res) => {
     res.redirect("home");
+});
+
+app.get('*', function(req, res){ // The 404 route
+  res.status(404).send("<html><body><h1>404</h1> <h3>Sorry, we cannot find this page! Please go to home page <a href='/login'>here</a>.</h3></body></html>");
 });
 
 app.listen(PORT, () => {
