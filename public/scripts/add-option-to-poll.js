@@ -24,7 +24,11 @@ function newElement() {
     var li = document.createElement("li");
     var inputValue = document.getElementById("myInput").value;
     var t = document.createTextNode(inputValue);
-    li.appendChild(t);
+    var p = document.createElement("p");
+    p.appendChild(t);
+    p.setAttribute("name", "option");
+    p.classList.add('option');
+    li.appendChild(p);
     if (inputValue === '') {
         alert("You must write something!");
     } else {

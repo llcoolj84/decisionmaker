@@ -5,7 +5,7 @@ const router  = express.Router();
 
 module.exports = (knex) => {
 
-  // get from /api/options
+  // post to /api/options
   router.post("/", (req, res) => {
     console.log(req.body);
 
