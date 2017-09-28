@@ -89,8 +89,19 @@ app.post("/login", (req, res) => {
 });
 
 app.get("/home", (req, res) => {
-    res.render("home");
+  knex.select("*").from("users").where({id: req.session.user_id})
+  .then((result) => { // If there is cookie
+    if (result.length === 0) {
+      res.render("login");
+    } else {
+      res.render('home');
+    }
+  })
+  .catch((error) => { //Handle no cookie
+    res.render("login");
+  });
 });
+
 // create new poll page
 app.post("/poll/:id", (req, res) => {
     let rString = generateRandomString(); // generate random string
@@ -114,7 +125,14 @@ app.get("/poll/abcdef", (req, res) => {
 
 //Haven't created the POST action yet...
 app.post("/home", (req, res) => {
-    res.redirect("home");
+  knex.select("*").from("").where({options: req.body.email}).then((result) => {
+    if (result.length === 0) {
+      return res.send("You are trying to login with invalid email...")
+    } else {
+      req.session.user_id = result[0].id; // set cookie session
+      res.redirect('/home');
+    }
+  });
 });
 
 app.post("/logout", (req, res) => {
