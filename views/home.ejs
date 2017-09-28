@@ -36,7 +36,7 @@
                 <br>
                 <!-- list building code goes here -->
 
-                <form action="/home" method="POST">
+                <form id='create_poll' action="/home" method="POST">
                 <div id="myDIV" class="header">
                     <h2> Poll Title </h2>
                     <br>
@@ -53,7 +53,12 @@
 
 
             <div class="col">
+              <form id='logout' action='/logout' method='POST'>
+                <button type="submit"  class="btn btn-primary btn-lg">Logout</button>
+              </form>
+
                 <font color=#f0f1ef>3 of 3</font>
+
             </div>
         </div>
         <div class="row">
