@@ -58,12 +58,22 @@ app.get("/home", (req, res) => {
 });
 // create new poll page
 app.post("/poll/:id", (req, res) => {
-    rString = generateRandomString(); // generate random string
-    midterm[rString] = {
-        //what is the reference to our database seed data?
-    };
-    res.redirect("/poll/:id");
+    let rString = generateRandomString(); // generate random string
+
+
+    // knex
+    //     .select("*")
+    //     .from("polls")
+    //     .then((results) => {
+    //         res.json(results);
+    //     });
+    // console.log('HELOOOOOOOOOOOOOO------------>>>>>>>>>>>');
+    // console.log(results);
+    res.render("/poll/:id");
+
 });
+
+
 
 app.get("/poll", (req, res) => {
     res.render("poll");
@@ -71,7 +81,7 @@ app.get("/poll", (req, res) => {
 
 //Haven't created the POST action yet...
 app.post("/home", (req, res) => {
-    res.redirect("poll");
+    res.redirect("home");
 });
 
 
