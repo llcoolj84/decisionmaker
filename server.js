@@ -41,6 +41,12 @@ app.use(express.static("public"));
 // Mount all resource routes
 app.use("/api/users", usersRoutes(knex));
 
+//Generate Random String
+function generateRandomString() {
+    randomString = Math.random().toString(36).substring(2, 8);
+    return randomString;
+}
+
 // Home page
 app.get("/", (req, res) => {
   const matchedUser = authen.authenUserByEmail(knex, "aaa@aaa.com");
@@ -54,11 +60,25 @@ app.get("/login", (req, res) => {
 app.get("/home", (req, res) => {
     res.render("home");
 });
+// create new poll page
+app.post("/poll/:id", (req, res) => {
+    rString = generateRandomString(); // generate random string
+    midterm[rString] = {
+        //what is the reference to our database seed data?
+    };
+    res.redirect("/poll/:id");
+});
+
+app.get("/poll", (req, res) => {
+    res.render("poll");
+});
 
 //Haven't created the POST action yet...
-app.post("/login", (req, res) => {
-    res.render("err");
+app.post("/home", (req, res) => {
+    res.redirect("poll");
 });
+
+
 
 app.listen(PORT, () => {
     console.log("Poll Master is listening on port " + PORT);
