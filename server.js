@@ -47,6 +47,11 @@ app.get("/login", (req, res) => {
     res.render("login");
 });
 
+app.get("/home", (req, res) => {
+    res.render("home");
+});
+
+//Haven't created the POST action yet...
 app.post("/login", (req, res) => {
     res.render("err");
 });
