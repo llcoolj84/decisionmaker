@@ -15,6 +15,7 @@ const morgan = require('morgan');
 const knexLogger = require('knex-logger');
 
 const cookieSession = require('cookie-session'); // Use Node.js cookie-session middleware
+app.use(cookieSession({keys: ['thisisTedKey', 'ThisisLHLKey']})); // set secret keys for cookie-session
 // const authen = require('./utils/authen-helper'); // Authentication helper
 
 // Seperated Routes for each Resource
@@ -43,17 +44,33 @@ app.use("/api/users", usersRoutes(knex));
 
 //Generate Random String
 function generateRandomString() {
-    randomString = Math.random().toString(36).substring(2, 8);
-    return randomString;
+  const abcset = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"; // 62 characters
+  let randomsix = '';
+
+  for (let i = 0; i < 6; i++) {
+    randomsix = randomsix + abcset[Math.floor(Math.random() * 62)];
+  }
+  return randomsix;
 }
 
 // Home page
 app.get("/", (req, res) => {
-  res.render("index");
+  // res.render("index");
+  res.redirect('/login');
 });
 
 app.get("/login", (req, res) => {
-  res.render("login");
+  knex.select("*").from("users").where({id: req.session.user_id})
+  .then((result) => { // If there is cookie
+    if (result.length === 0) {
+      res.render("login");
+    } else {
+      res.redirect('/home');
+    }
+  })
+  .catch((error) => { //Handle no cookie
+    res.render("login");
+  });
 });
 
 app.post("/login", (req, res) => {
@@ -61,6 +78,7 @@ app.post("/login", (req, res) => {
     if (result.length === 0) {
       return res.send("You are trying to login with invalid email...")
     } else {
+      req.session.user_id = result[0].id; // set cookie session
       res.redirect('/home');
     }
   });
@@ -86,15 +104,22 @@ app.post("/poll/:id", (req, res) => {
 
 });
 
-
-
-app.get("/poll", (req, res) => {
+app.get("/poll/abcdef", (req, res) => {
     res.render("poll");
 });
 
 //Haven't created the POST action yet...
 app.post("/home", (req, res) => {
     res.redirect("home");
+});
+
+app.post("/logout", (req, res) => {
+  req.session = null; // clear cookie session
+  res.redirect("/login");
+});
+
+app.get('*', function(req, res){ // The 404 route
+  res.status(404).send("<html><body><h1>404</h1> <h3>Sorry, we cannot find this page! Please go to home page <a href='/login'>here</a>.</h3></body></html>");
 });
 
 app.listen(PORT, () => {
