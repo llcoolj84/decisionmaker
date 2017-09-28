@@ -57,5 +57,5 @@ app.post("/login", (req, res) => {
 });
 
 app.listen(PORT, () => {
-    console.log("Example app listening on port " + PORT);
+    console.log("Poll Master is listening on port " + PORT);
 });
