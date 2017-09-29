@@ -7,16 +7,23 @@ module.exports = (knex) => {
 
   // post to /api/options
   router.post("/", (req, res) => {
-    console.log(req.body);
+
+    const randomkey = req.body.pollKey;
+    const title = req.body.title;
+    const description = req.body.description;
 
     knex
-      .insert({randomkey: "abcdef", title: "titleA", description: "this is the description", user_id: req.session.user_id})
+      .insert({randomkey: randomkey, title: title, description: description, user_id: req.session.user_id})
       .into("polls")
       .returning('id')
       .then((id) => {
         console.log(id);
+        let multiRow = [];
+        req.body.optionArray.forEach((eachOption) => {
+          multiRow.push({name: eachOption, poll_id: id[0]})
+        })
         knex
-          .insert({name: "Beef", poll_id: id[0]})
+          .insert(multiRow)
           .into("options")
           .then((result) => {
             console.log(result);
