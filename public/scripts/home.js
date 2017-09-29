@@ -55,7 +55,7 @@ $(() => {
         // insert the body of the submit to db using ajax and knex
         $.ajax({
             method: "POST",
-            url: "/api/options",
+            url: "/api/polls",
             data: JSON.stringify(newPoll),
             contentType: "application/json"
         }).then({
