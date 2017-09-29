@@ -45,12 +45,13 @@ app.use(express.static("public"));
 app.use("/api/users", usersRoutes(knex));
 app.use("/api/polls", pollsRoutes(knex));
 
-// Home page
+// Root page
 app.get("/", (req, res) => {
     // res.render("index");
     res.redirect('/login');
 });
 
+// Login page
 app.get("/login", (req, res) => {
     knex.select("*").from("users").where({ id: req.session.user_id }).limit(1)
         .then((result) => { // If there is cookie
@@ -65,6 +66,7 @@ app.get("/login", (req, res) => {
         });
 });
 
+// Login
 app.post("/login", (req, res) => {
     knex.select("*").from("users").where({ email: req.body.email }).limit(1).then((result) => {
         if (result.length === 0) {
@@ -76,50 +78,37 @@ app.post("/login", (req, res) => {
     });
 });
 
+// Home page
 app.get("/home", (req, res) => {
-    knex.select("*").from("users").where({ id: req.session.user_id }).limit(1)
-        .then((result) => { // If there is cookie
-            if (result.length === 0) {
-                res.render("login");
-            } else {
-                res.render('home');
-            }
-        })
-        .catch((error) => { //Handle no cookie
-            res.render("login");
-        });
+  knex.select("*").from("users").where({ id: req.session.user_id }).limit(1)
+    .then((result) => { // If there is cookie
+        if (result.length === 0) {
+            res.redirect("/login");
+        } else {
+            res.render('home');
+        }
+    })
+    .catch((error) => { //Handle no cookie
+        res.redirect("login");
+    });
 });
 
-// create new poll page
+// Vote Page
+app.get("/poll/:id", (req, res) => {
+  res.render("poll");
+});
+
+// Post vote
 app.post("/poll/:id", (req, res) => {
     res.render("/poll/:id");
-
 });
 
-app.get("/poll/:id", (req, res) => {
-    console.log(req.params.id);
-    res.render("poll");
-});
-
-app.post("/poll/abcdef", (req, res) => {
-    res.render("poll");
-});
-
+// History page
 app.get("/history", (req, res) => {
     res.render("history");
 });
 
-app.post("/home", (req, res) => {
-    knex.select("*").from("").where({ options: req.body.email }).limit(1).then((result) => {
-        if (result.length === 0) {
-            return res.send("You are trying to login with invalid email...")
-        } else {
-            req.session.user_id = result[0].id; // set cookie session
-            res.redirect('/home');
-        }
-    });
-});
-
+// Logout page
 app.post("/logout", (req, res) => {
     req.session = null; // clear cookie session
     res.redirect("/login");

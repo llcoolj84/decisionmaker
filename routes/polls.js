@@ -26,7 +26,7 @@ module.exports = (knex) => {
           .insert(multiRow)
           .into("options")
           .then((result) => {
-            console.log(result);
+            res.status(200);
         });
       })
   });
