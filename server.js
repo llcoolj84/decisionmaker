@@ -94,17 +94,6 @@ app.get("/home", (req, res) => {
 
 // create new poll page
 app.post("/poll/:id", (req, res) => {
-    let rString = generateRandomString(); // generate random string
-
-
-    // knex
-    //     .select("*")
-    //     .from("polls")
-    //     .then((results) => {
-    //         res.json(results);
-    //     });
-    // console.log('HELOOOOOOOOOOOOOO------------>>>>>>>>>>>');
-    // console.log(results);
     res.render("/poll/:id");
 
 });

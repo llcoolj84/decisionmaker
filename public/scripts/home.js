@@ -1,17 +1,24 @@
 $(() => {
 
-    //create a new link for the poll
+    //create a new link for the poll and results
     function createPollLink() {
 
+        var link1 = $("<a href='http://lighthouselabs.com'>Link to Poll</a>");
+        $('#links').append(link1).append('<br>');
+        var link2 = $("<a href='http://google.com'>Link to Results</a>");
+        $('#links').append(link2);
 
     }
 
-    //create a new link for the poll
-    function createResultLink() {
+    // function successAlert() {
 
+    //           var alerSuccess = $("<div class='alert alert-success' role='alert'">
+    //           <strong>Well done!</strong> You successfully read this important alert message.
+    //         </div>");
+    //           $('#links').append(link1).append('<br>');
 
-    }
-
+    //       }
+    ``
     //Generate Random String
     function generateRandomString() {
         const abcset = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"; // 62 characters
@@ -42,6 +49,8 @@ $(() => {
             pollKey: pollKey
         };
 
+
+
         for (var i = 0; i < $(".option").length; i++) {
             optionArray.push($(".option")[i].innerHTML);
         }
@@ -52,15 +61,24 @@ $(() => {
         console.log(pollKey);
         console.log(newPoll);
 
-        // insert the body of the submit to db using ajax and knex
-        $.ajax({
-            method: "POST",
-            url: "/api/options",
-            data: JSON.stringify(newPoll),
-            contentType: "application/json"
-        }).then({
-            // give me those two links (one result link and one link to send to other people)
-        })
+
+        if (title.length === 0 || optionArray.length === 0) {
+
+            alert("Please include a poll 'title' and 'options' to submit");
+
+        } else {
+
+            // insert the body of the submit to db using ajax and knex
+            $.ajax({
+                method: "POST",
+                url: "/api/options",
+                data: JSON.stringify(newPoll),
+                contentType: "application/json"
+            }).then
+            createPollLink()
+
+            this.reset();
+        }
 
     });
 

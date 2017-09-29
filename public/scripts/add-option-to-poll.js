@@ -33,6 +33,7 @@ function newElement() {
         alert("You must write something!");
     } else {
         document.getElementById("myUL").appendChild(li);
+        $('#myInput').focus();
     }
     document.getElementById("myInput").value = "";
 
