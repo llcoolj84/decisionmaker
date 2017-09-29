@@ -7,7 +7,6 @@
     <link rel="stylesheet" href="/vendor/normalize-4.1.1.css" type="text/css" />
     <link rel="stylesheet" href="/vendor/border-box.css" type="text/css" />
     <link rel="stylesheet" href="/styles/layout.css" type="text/css" />
-    <link rel="stylesheet" href="/styles/create-poll.css" type="text/css" />
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
     <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap-theme.min.css">
     <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css">
@@ -21,6 +20,10 @@
     <div class="container">
         <div class="row">
             <div class="col">
+                <font color=#f0f1ef>3 of 3</font>
+                <form id='logout' action='/logout' method='POST'>
+                    <button type="submit" class="btn btn-primary btn-lg">Logout</button>
+                </form>
                 <font color=#f0f1ef>1 of 3</font>
             </div>
             <div class="col-6">
@@ -36,42 +39,46 @@
                 <br>
                 <!-- list building code goes here -->
 
-                <form id='create_poll' action="/home" method="POST">
-                <div id="myDIV" class="header">
-                    <h2> Poll Title </h2>
-                    <br>
-                    <input type="text" id="myInput" placeholder="Add option">
-                    <span onclick="newElement()" class="addBtn">Add</span>
+                <div class="container">
+                    <div class="col">
+                    </div>
+                    <form id='create_poll' action="/home" method="POST">
+                        <div>
+                            <input id="poll_title" class="title" type="text" class="form-control" placeholder="Title">
+                        </div>
+                        <div>
+                            <input id="description" class="description" type="text" class="form-control" placeholder="Description">
+                        </div>
+                        <div id="myDIV" class="header">
+                            <!-- <h2> Poll Title </h2> -->
+                            <br>
+                            <input type="text" id="myInput" placeholder="Add option">
+                            <span onclick="newElement()" class="addBtn">Add</span>
+                        </div>
+                        <ul id="myUL">
+                        </ul>
+                        <button action="/home" method="POST" type="submit" class="btn btn-primary btn-lg btn-block">Submit</button>
+                    </form>
+
                 </div>
-
-                <ul id="myUL">
-                </ul>
-                <button action="/home" method="POST" type="submit" class="btn btn-primary btn-lg btn-block">Submit</button>
-              </form>
-
             </div>
 
 
-            <div class="col">
-              <form id='logout' action='/logout' method='POST'>
-                <button type="submit"  class="btn btn-primary btn-lg">Logout</button>
-              </form>
 
-                <font color=#f0f1ef>3 of 3</font>
-
-            </div>
         </div>
-        <div class="row">
-            <div class="col">
-                <font color=#f0f1ef>1 of 3</font>
-            </div>
-            <div class="col-5">
-                <font color=#f0f1ef>2 of 3 (wider)</font>
-            </div>
-            <div class="col">
-                <font color=#f0f1ef>3 of 3</font>
-            </div>
+    </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            <font color=#f0f1ef>1 of 3</font>
         </div>
+        <div class="col-5">
+            <font color=#f0f1ef>2 of 3 (wider)</font>
+        </div>
+        <div class="col">
+            <font color=#f0f1ef>3 of 3</font>
+        </div>
+    </div>
     </div>
 
 
