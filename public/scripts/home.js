@@ -1,5 +1,17 @@
 $(() => {
 
+    //create a new link for the poll
+    function createPollLink() {
+
+
+    }
+
+    //create a new link for the poll
+    function createResultLink() {
+
+
+    }
+
     //Generate Random String
     function generateRandomString() {
         const abcset = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"; // 62 characters
@@ -11,6 +23,7 @@ $(() => {
         return randomsix;
     }
 
+    //create an new Poll object on "submit"
 
     $('#create_poll').on("submit", function(event) {
 
@@ -22,17 +35,16 @@ $(() => {
         var description = $("#description").val();
         var optionArray = [];
         var pollKey = generateRandomString();
-
-        for (var i = 0; i < $(".option").length; i++) {
-            optionArray.push($(".option")[i].innerHTML);
-        }
-
         var newPoll = {
             optionArray: optionArray,
             title: title,
             description: description,
             pollKey: pollKey
         };
+
+        for (var i = 0; i < $(".option").length; i++) {
+            optionArray.push($(".option")[i].innerHTML);
+        }
 
         console.log(optionArray);
         console.log(title);
@@ -49,10 +61,6 @@ $(() => {
         }).then({
             // give me those two links (one result link and one link to send to other people)
         })
-
-        // let current_list = $("#myUL > li" );
-        // alert(current_list);
-        // console.log(current_list);
 
     });
 
