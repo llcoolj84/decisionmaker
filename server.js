@@ -20,7 +20,6 @@ app.use(cookieSession({ keys: ['thisisTedKey', 'ThisisLHLKey'] })); // set secre
 
 // Seperated Routes for each Resource
 const usersRoutes = require("./routes/users");
-const optionsRoutes = require("./routes/options");
 const pollsRoutes = require("./routes/polls");
 
 // Load the logger first so all (static) HTTP requests are logged to STDOUT
@@ -44,7 +43,6 @@ app.use(express.static("public"));
 
 // Mount all resource routes
 app.use("/api/users", usersRoutes(knex));
-app.use("/api/options", optionsRoutes(knex));
 app.use("/api/polls", pollsRoutes(knex));
 
 // Home page
@@ -98,8 +96,13 @@ app.post("/poll/:id", (req, res) => {
 
 });
 
-app.get("/poll/abcdef", (req, res) => {
-    res.render("poll");
+app.get("/poll/:id", (req, res) => {
+  console.log(req.params.id);
+  res.render("poll");
+});
+
+app.post("/poll/abcdef", (req, res) => {
+  res.render("poll");
 });
 
 //Haven't created the POST action yet...
