@@ -9,7 +9,6 @@ $(() => {
     for (var i = 0; i < $(".option").length; i++) {
       optionArray.push($(".option")[i].innerHTML);
     }
-    console.log(optionArray);
 
     // insert the body of the submit to db using ajax and knex
     $.ajax({

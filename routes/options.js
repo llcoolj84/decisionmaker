@@ -10,12 +10,18 @@ module.exports = (knex) => {
     console.log(req.body);
 
     knex
-      .insert({name: "Beef", poll_id: "abcdef"})
-      .into("options")
-      .then((result) => {
-        console.log(result);
-    });
-
+      .insert({randomkey: "abcdef", title: "titleA", description: "this is the description", user_id: req.session.user_id})
+      .into("polls")
+      .returning('id')
+      .then((id) => {
+        console.log(id);
+        knex
+          .insert({name: "Beef", poll_id: id[0]})
+          .into("options")
+          .then((result) => {
+            console.log(result);
+        });
+      })
   });
 
   // post to /api/options
