@@ -31,18 +31,29 @@ module.exports = (knex) => {
       })
   });
 
-  // post to /api/polls
-  router.post("/", (req, res) => {
-    console.log(req.body);
+  // get from /api/polls/:id
+  router.get("/:id", (req, res) => {
 
-    // knex
-    //   .select("*")
-    //   .from("users")
-    //   .then((results) => {
-    //     res.json(results);
-    // });
+    knex
+      .select("polls.title", "polls.description", "options.name")
+      .from("polls")
+      .join("options", "polls.id", "=", "options.poll_id")
+      .where({randomkey: req.params.id})
+      .then((rows) => {
+        let pollInfo = {
+          title: rows[0].title,
+          description: rows[0].description,
+          options: []
+        };
+        rows.forEach((eachRow) => {
+          pollInfo.options.push(eachRow.name);
+        });
+        res.json(pollInfo);
+    });
 
   });
 
   return router;
 }
+
+

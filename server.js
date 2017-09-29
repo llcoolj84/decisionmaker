@@ -52,7 +52,7 @@ app.get("/", (req, res) => {
 });
 
 app.get("/login", (req, res) => {
-    knex.select("*").from("users").where({ id: req.session.user_id })
+    knex.select("*").from("users").where({ id: req.session.user_id }).limit(1)
         .then((result) => { // If there is cookie
             if (result.length === 0) {
                 res.render("login");
@@ -66,7 +66,7 @@ app.get("/login", (req, res) => {
 });
 
 app.post("/login", (req, res) => {
-    knex.select("*").from("users").where({ email: req.body.email }).then((result) => {
+    knex.select("*").from("users").where({ email: req.body.email }).limit(1).then((result) => {
         if (result.length === 0) {
             return res.send("You are trying to login with invalid email...")
         } else {
@@ -77,7 +77,7 @@ app.post("/login", (req, res) => {
 });
 
 app.get("/home", (req, res) => {
-    knex.select("*").from("users").where({ id: req.session.user_id })
+    knex.select("*").from("users").where({ id: req.session.user_id }).limit(1)
         .then((result) => { // If there is cookie
             if (result.length === 0) {
                 res.render("login");
@@ -105,9 +105,8 @@ app.post("/poll/abcdef", (req, res) => {
   res.render("poll");
 });
 
-//Haven't created the POST action yet...
 app.post("/home", (req, res) => {
-    knex.select("*").from("").where({ options: req.body.email }).then((result) => {
+    knex.select("*").from("").where({ options: req.body.email }).limit(1).then((result) => {
         if (result.length === 0) {
             return res.send("You are trying to login with invalid email...")
         } else {
