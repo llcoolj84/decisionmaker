@@ -97,12 +97,16 @@ app.post("/poll/:id", (req, res) => {
 });
 
 app.get("/poll/:id", (req, res) => {
-  console.log(req.params.id);
-  res.render("poll");
+    console.log(req.params.id);
+    res.render("poll");
 });
 
 app.post("/poll/abcdef", (req, res) => {
-  res.render("poll");
+    res.render("poll");
+});
+
+app.get("/history", (req, res) => {
+    res.render("history");
 });
 
 //Haven't created the POST action yet...
