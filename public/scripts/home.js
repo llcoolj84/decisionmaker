@@ -1,12 +1,18 @@
 $(() => {
 
     //create a new link for the poll and results
-    function createPollLink() {
+    function createPollLinks(key) {
 
-        var link1 = $("<a href='http://lighthouselabs.com'>Link to Poll</a>");
+        var pollURL = "/poll/";
+        var resultURL = "/result/";
+        var result1 = pollURL + key;
+        var result2 = resultURL + key;
+
+        var link1 = $("<a>Link to Poll</a>").attr('href', result1);
         $('#links').append(link1).append('<br>');
-        var link2 = $("<a href='http://google.com'>Link to Results</a>");
-        $('#links').append(link2);
+
+        var link2 = $("<a>Link to Results</a>").attr('href', result2);
+        $('#links').append(link2).append('<br>');
 
     }
 
@@ -18,7 +24,7 @@ $(() => {
     //           $('#links').append(link1).append('<br>');
 
     //       }
-    ``
+
     //Generate Random String
     function generateRandomString() {
         const abcset = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"; // 62 characters
@@ -49,8 +55,6 @@ $(() => {
             pollKey: pollKey
         };
 
-
-
         for (var i = 0; i < $(".option").length; i++) {
             optionArray.push($(".option")[i].innerHTML);
         }
@@ -60,7 +64,6 @@ $(() => {
         console.log(description);
         console.log(pollKey);
         console.log(newPoll);
-
 
         if (title.length === 0 || optionArray.length === 0) {
 
@@ -74,8 +77,9 @@ $(() => {
                 url: "/api/polls",
                 data: JSON.stringify(newPoll),
                 contentType: "application/json"
-            }).then
-            createPollLink()
+            }).done
+
+            createPollLinks(pollKey);
 
             this.reset();
         }

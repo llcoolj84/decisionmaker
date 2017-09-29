@@ -17,16 +17,25 @@
 </head>
 
 <body>
+    <nav class="navbar sticky-top navbar-light bg-light">
+        <a class="navbar-brand">Poll Master</a>
+        <a href="/login">
+            <form id='logout' action='/logout' method='POST'>
+                <button type="submit" class="btn btn-primary btn-lg">Logout</button>
+            </form>
+            <form id='history' action='/history' method='GET'>
+                <button type="submit" class="btn btn-secondary">History</button>
+            </form>
+        </a>
+
+    </nav>
     <div class="container">
         <div class="row">
-            <div class="col-6">
-                <font color=#f0f1ef>3 of 3</font>
-                <form id='logout' action='/logout' method='POST'>
-                    <button type="submit" class="btn btn-primary btn-lg">Logout</button>
-                </form>
+            <div class="col">
+
                 <font color=#f0f1ef>1 of 3</font>
             </div>
-            <div class="col-6">
+            <div class="col">
                 <font color=#f0f1ef>2 of 3 (wider)</font>
                 <h1>
                     <font color=#f0f1ef>*logo goes here*</font>
@@ -40,33 +49,10 @@
                 <!-- list building code goes here -->
                 <div class="container">
                     <div class="col">
-                    </div>
-                    <form id='create_poll' action="/home" method="POST">
-                        <div>
-                            <input id="poll_title" class="title" type="text" class="form-control" placeholder="Title">
-                        </div>
-                        <div>
-                            <input id="description" class="description" type="text" class="form-control" placeholder="Description">
-                        </div>
-                        <div id="myDIV" class="header">
-                            <!-- <h2> Poll Title </h2> -->
-                            <br>
-                            <input type="text" id="myInput" placeholder="Add option">
-                            <span onclick="newElement()" class="addBtn">Add</span>
-                            <ul id="myUL">
-                        </div>
-                        </ul>
-                        <button type="submit" class="btn btn-secondary btn-lg">Submit</button>
-                    </form>
-                    <div id='links'>
-                        <!-- This is wher 2 links will go -->
-                        <p>links go here</p>
+                        <font color=#f0f1ef>3 of 3</font>
                     </div>
                 </div>
             </div>
-
-
-
         </div>
     </div>
     </div>
@@ -74,7 +60,27 @@
         <div class="col">
             <font color=#f0f1ef>1 of 3</font>
         </div>
-        <div class="col-5">
+        <div class="col">
+            <form id='create_poll' action="/home" method="POST">
+                <div>
+                    <input id="poll_title" class="title" type="text" class="form-control" placeholder="Title">
+                </div>
+                <div>
+                    <input id="description" class="description" type="text" class="form-control" placeholder="Description">
+                </div>
+                <div id="myDIV" class="header">
+                    <!-- <h2> Poll Title </h2> -->
+                    <br>
+                    <input type="text" id="myInput" placeholder="Add option">
+                    <span onclick="newElement()" class="addBtn">Add</span>
+                    <ul id="myUL">
+                </div>
+                </ul>
+                <button type="submit" class="btn btn-secondary btn-lg">Submit</button>
+            </form>
+            <div id='links'>
+                <p>links go here</p>
+            </div>
             <font color=#f0f1ef>2 of 3 (wider)</font>
         </div>
         <div class="col">
