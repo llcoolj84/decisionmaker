@@ -35,7 +35,7 @@ module.exports = (knex) => {
   router.get("/:id", (req, res) => {
 
     knex
-      .select("polls.title", "polls.description", "options.name")
+      .select("polls.title", "polls.description", "options.name", "options.id")
       .from("polls")
       .join("options", "polls.id", "=", "options.poll_id")
       .where({randomkey: req.params.id})
@@ -46,7 +46,7 @@ module.exports = (knex) => {
           options: []
         };
         rows.forEach((eachRow) => {
-          pollInfo.options.push(eachRow.name);
+          pollInfo.options.push({optionName: eachRow.name, optionId: eachRow.id});
         });
         res.json(pollInfo);
     });
