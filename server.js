@@ -113,6 +113,10 @@ app.get("/poll/abcdef", (req, res) => {
     res.render("poll");
 });
 
+app.post("/poll/abcdef", (req, res) => {
+  res.render("poll");
+});
+
 //Haven't created the POST action yet...
 app.post("/home", (req, res) => {
     knex.select("*").from("").where({ options: req.body.email }).then((result) => {
