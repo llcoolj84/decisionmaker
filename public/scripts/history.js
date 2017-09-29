@@ -49,40 +49,18 @@ $(() => {
 
     createPollElement(singlePollHistory);
 
-    // createPollElement();
+    var loadPoll = function() {
+        var currentPath = window.location.pathname;
+        var randomKey = currentPath.substr(currentPath.lastIndexOf('/') + 1); // randomKey is last segment of currentPath
+        $.ajax({
+            type: "GET",
+            url: "/api/polls/" + randomKey,
+            dataType: 'json',
+        }).done((onePoll) => {
+            createPollElements(onePoll);
+        });
+    };
 
-    // //get request to load user polls into memory ready to be rendered
-
-    // function loadPolls() {
-    //     $.ajax({
-    //         url: '/polls',
-    //         method: 'GET',
-    //         success: function(data) {
-    //             // let arr = data[data.length - 1];
-    //             // let $newPoll = createPollElement(arr);
-    //             // $('.list_results').prepend($newPoll);
-    //             createPollElement();
-    //         }
-    //     });
-    // }
-
-    // // render polls and prepend them in container
-
-    // function renderPolls() {
-
-    //     $.ajax({
-    //         url: '/polls',
-    //         method: 'GET',
-    //         success: function(polls) {
-    //             polls.forEach(function(eachP) {
-    //                 let $poll = reatePollElement(eachP);
-    //                 $('.list_results').prepend($poll);
-
-    //             })
-    //         }
-    //     });
-    // }
-
-    // renderPolls();
+    loadPoll();
 
 });
