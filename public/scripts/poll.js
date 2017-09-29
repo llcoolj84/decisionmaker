@@ -6,19 +6,11 @@ $(function() {
         $title = $("<h4>").addClass("card-title").text(singlePoll.title);
         $description = $("<p>").addClass("card-text").text(singlePoll.description);
 
-<<<<<<< HEAD
-        singlePoll.options.forEach(function (eachOption) {
-          $eachOption = $('<a>').addClass("list-group-item list-group-item-action");
-          $('<span>').addClass("col-sm-6").text(eachOption.optionName).appendTo($eachOption);
-          $('<input>').addClass("col-sm-4").data("optionId", eachOption.optionId).attr("placeholder", "1, 2, 3 etc." ).appendTo($eachOption);
-          $eachOption.appendTo($(".list-group"));
-=======
         singlePoll.options.forEach(function(eachOption) {
             $eachOption = $('<a>').addClass("list-group-item list-group-item-action");
             $('<span>').addClass("col-sm-6").text(eachOption).appendTo($eachOption);
             $('<input>').addClass("col-sm-4").attr("placeholder", "1, 2, 3 etc.").appendTo($eachOption);
             $eachOption.appendTo($(".list-group"));
->>>>>>> 68ad90cf7adfb781c1cffa0af807b8df1546bdef
         });
 
         $description.prependTo($card);
@@ -40,31 +32,31 @@ $(function() {
 
     loadPoll();
 
-    $('#the-submit-button').on('submit', function (event) {
+    $('#the-submit-button').on('submit', function(event) {
 
-      event.preventDefault();
+        event.preventDefault();
 
-      votes = [
-        {optionId: 10, score: 3},
-        {optionId: 10, score: 2},
-        {optionId: 10, score: 1}
-      ];
+        votes = [
+            { optionId: 10, score: 3 },
+            { optionId: 10, score: 2 },
+            { optionId: 10, score: 1 }
+        ];
 
-      var oneAnswer = {
-        first_name: "ABC",
-        votes: votes
-      };
+        var oneAnswer = {
+            first_name: "ABC",
+            votes: votes
+        };
 
-      $.ajax({
-        type: "POST",
-        url: "/api/answers",
-        data: JSON.stringify(oneAnswer),
-        contentType: "application/json"
-      }).done(
-        //...
-      );
+        $.ajax({
+            type: "POST",
+            url: "/api/answers",
+            data: JSON.stringify(oneAnswer),
+            contentType: "application/json"
+        }).done(
+            //...
+        );
 
-      console.log(event);
+        console.log(event);
     });
 
 })
