@@ -8,8 +8,8 @@ $(function(){
 
     singlePoll.options.forEach(function (eachOption) {
       $eachOption = $('<a>').addClass("list-group-item list-group-item-action");
-      $('<span>').addClass("col-sm-10").text(eachOption).appendTo($eachOption);
-      $('<input>').addClass("col-sm-2").appendTo($eachOption);
+      $('<span>').addClass("col-sm-6").text(eachOption).appendTo($eachOption);
+      $('<input>').addClass("col-sm-4").attr("placeholder", "1, 2, 3 etc." ).appendTo($eachOption);
       $eachOption.appendTo($(".list-group"));
     });
 
