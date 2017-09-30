@@ -3,7 +3,6 @@ $(() => {
     function createPollElement(pollHistory) {
 
         let $container = $("<div>").addClass("list_results");
-
         let $title = $("<button>").addClass("list-group-item list-group-item-action active")
             .attr('id', 'title').text(pollHistory.title);
 
@@ -15,7 +14,7 @@ $(() => {
         $container.append($description);
 
         pollHistory.poll_options.forEach(function(eachOption) {
-            //
+
             let $poll_options = $("<button>").addClass("list-group-item list-group-item-action")
                 .attr('id', 'poll_options').attr('disabled', "").text(eachOption.option + ': ' + eachOption.pollcount);
 
@@ -49,18 +48,68 @@ $(() => {
 
     createPollElement(singlePollHistory);
 
-    var loadPoll = function() {
-        var currentPath = window.location.pathname;
-        var randomKey = currentPath.substr(currentPath.lastIndexOf('/') + 1); // randomKey is last segment of currentPath
-        $.ajax({
-            type: "GET",
-            url: "/api/polls/" + randomKey,
-            dataType: 'json',
-        }).done((onePoll) => {
-            createPollElements(onePoll);
-        });
-    };
+    // singlePollAnswers comes from DB using ajax GET method
 
-    loadPoll();
+    let singlePollAnswers = [
+        { option_id: 11, option_name: "Apple", score: 2 },
+        { option_id: 12, option_name: "Banana", score: 1 },
+        { option_id: 11, option_name: "Apple", score: 1 },
+        { option_id: 12, option_name: "Banana", score: 2 },
+        { option_id: 11, option_name: "Apple", score: 1 },
+        { option_id: 12, option_name: "Banana", score: 2 },
+        { option_id: 11, option_name: "Apple", score: 1 },
+        { option_id: 12, option_name: "Banana", score: 2 },
+        { option_id: 11, option_name: "Apple", score: 1 },
+        { option_id: 12, option_name: "Banana", score: 2 },
+        { option_id: 11, option_name: "Apple", score: 1 },
+        { option_id: 12, option_name: "Banana", score: 2 },
+        { option_id: 11, option_name: "Apple", score: 1 },
+        { option_id: 12, option_name: "Banana", score: 2 },
+        { option_id: 11, option_name: "Apple", score: 2 },
+        { option_id: 12, option_name: "Banana", score: 1 },
+        { option_id: 11, option_name: "Apple", score: 1 },
+        { option_id: 12, option_name: "Banana", score: 2 },
+        { option_id: 11, option_name: "Apple", score: 1 },
+        { option_id: 12, option_name: "Banana", score: 2 },
+        { option_id: 11, option_name: "Apple", score: 1 },
+        { option_id: 12, option_name: "Banana", score: 2 },
+        { option_id: 11, option_name: "Apple", score: 1 },
+        { option_id: 12, option_name: "Banana", score: 2 },
+        { option_id: 11, option_name: "Apple", score: 1 },
+        { option_id: 12, option_name: "Banana", score: 2 },
+        { option_id: 11, option_name: "Apple", score: 1 },
+        { option_id: 12, option_name: "Banana", score: 2 },
+        { option_id: 11, option_name: "Apple", score: 1 },
+        { option_id: 12, option_name: "Banana", score: 2 },
+        { option_id: 11, option_name: "Apple", score: 1 },
+        { option_id: 12, option_name: "Banana", score: 2 },
+        { option_id: 11, option_name: "Apple", score: 1 },
+        { option_id: 12, option_name: "Banana", score: 2 }
+    ];
+
+    function reduce_borda_count(inputArr) {
+
+        var temp = [];
+        for (var i = 0; i < inputArr.length; i++) {
+            var obj = inputArr[i];
+
+            if (!temp[obj.option_id]) {
+                temp[obj.option_id] = obj;
+            } else {
+                temp[obj.option_id].score += obj.score;
+            }
+        }
+
+        var result = [];
+        for (var prop in temp)
+            result.push(temp[prop]);
+
+        console.log(result);
+        return result;
+    }
+
+
+    reduce_borda_count(singlePollAnswers);
+
 
 });
