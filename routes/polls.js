@@ -11,15 +11,16 @@ module.exports = (knex) => {
     const randomkey = req.body.pollKey;
     const title = req.body.title;
     const description = req.body.description;
+    const optionArray = req.body.optionArray;
 
     knex
       .insert({randomkey: randomkey, title: title, description: description, user_id: req.session.user_id})
       .into("polls")
       .returning('id')
       .then((id) => {
-        console.log(id);
+        // console.log(id);
         let multiRow = [];
-        req.body.optionArray.forEach((eachOption) => {
+        optionArray.forEach((eachOption) => {
           multiRow.push({name: eachOption, poll_id: id[0]})
         })
         knex
