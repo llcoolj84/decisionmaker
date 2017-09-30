@@ -116,8 +116,14 @@ app.post("/logout", (req, res) => {
     res.redirect("/login");
 });
 
-app.get('*', function(req, res) { // The 404 route
-    res.status(404).send("<html><body><h1>404</h1> <h3>Sorry, we cannot find this page! Please go to home page <a href='/login'>here</a>.</h3></body></html>");
+// Thank you page
+app.get("/thankyou", (req, res) => {
+  res.render("thankyou");
+});
+
+// The 404 route
+app.get('*', function(req, res) {
+  res.status(404).render("page404");
 });
 
 app.listen(PORT, () => {

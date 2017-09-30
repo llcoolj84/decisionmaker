@@ -26,7 +26,7 @@ module.exports = (knex) => {
         .insert(multiRow)
         .into("answers")
         .then((result) => {
-          res.status(200);
+          res.status(200).json(result); // has to send back something otherwise the ajax .done won't be triggered.
         });
       });
   })
