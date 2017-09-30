@@ -1,6 +1,6 @@
 // function for borda count "score" and "option_id"
 
-var dummy_results = [
+let objArr1 = [
     { option_id: 11, score: 3 },
     { option_id: 12, score: 2 },
     { option_id: 13, score: 1 },
@@ -12,53 +12,26 @@ var dummy_results = [
     { option_id: 13, score: 1 }
 ];
 
+function reduce_borda_count(objArr) {
 
-var total_cost = 0;
+    // first, convert data into a Map with reduce
+    let counts = objArr1.reduce((prev, curr) => {
+        let count = prev.get(curr.option_id) || 0;
+        prev.set(curr.option_id, curr.score + count);
+        return prev;
+    }, new Map());
 
-option_id
+    // then, map your counts object back to an array
+    let reducedObjArr = [...counts].map(([option_id, score]) => {
+        let finalResults = { option_id, score };
+        return finalResults;
+    })
 
-var total_cost = 0;
-
-function add_to_total_cost(amount) {
-    total_cost += amount.cost;
-}
-
-var shopping_cart_1 = [{
-        item: 'shirt',
-        cost: 22
-    },
-    {
-        item: 'shorts',
-        cost: 26
-    }
-];
-
-var shopping_cart_2 = [{
-        item: 'cereal',
-        cost: 4
-    },
-    {
-        item: 'milk',
-        cost: 3
-    },
-    {
-        item: 'eggs',
-        cost: 2
-    }
-]
-
-shopping_cart_1.forEach(add_to_total_cost);
-shopping_cart_2.forEach(add_to_total_cost);
-
-
-console.log(total_cost);
-
+    console.log(reducedObjArr);
 
 }
 
-
-
-
+reduce_borda_count(objArr1);
 
 // bordaCount expected to look like
 // var finalResults = [
