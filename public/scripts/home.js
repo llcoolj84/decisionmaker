@@ -1,6 +1,7 @@
 $(() => {
 
     //create a new link for the poll and results
+
     function createPollLinks(key) {
 
         var pollURL = "/poll/";
@@ -55,19 +56,18 @@ $(() => {
             pollKey: pollKey
         };
 
-        for (var i = 0; i < $(".option").length; i++) {
-            optionArray.push($(".option")[i].innerHTML);
+        for (var i = 0; i < $("li.list-option").length; i++) {
+            optionArray.push($("li.list-option")[i].innerHTML);
         }
-
-        console.log(optionArray);
         console.log(title);
         console.log(description);
+        console.log(optionArray);
         console.log(pollKey);
         console.log(newPoll);
 
-        if (title.length === 0 || optionArray.length === 0) {
+        if (title.length === 0 || optionArray.length < 2) {
 
-            alert("Please include a poll 'title' and 'options' to submit");
+            alert("Please include a poll Title and 2 options to submit");
 
         } else {
 
@@ -85,5 +85,8 @@ $(() => {
         }
 
     });
+
+    $('.poll-title').focus();
+
 
 });

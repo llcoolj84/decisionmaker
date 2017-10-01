@@ -82,22 +82,22 @@ app.post("/login", (req, res) => {
 
 // Home page
 app.get("/home", (req, res) => {
-  knex.select("*").from("users").where({ id: req.session.user_id }).limit(1)
-    .then((result) => { // If there is cookie
-        if (result.length === 0) {
-            res.redirect("/login");
-        } else {
-            res.render('home');
-        }
-    })
-    .catch((error) => { //Handle no cookie
-        res.redirect("login");
-    });
+    knex.select("*").from("users").where({ id: req.session.user_id }).limit(1)
+        .then((result) => { // If there is cookie
+            if (result.length === 0) {
+                res.redirect("/login");
+            } else {
+                res.render('home');
+            }
+        })
+        .catch((error) => { //Handle no cookie
+            res.redirect("login");
+        });
 });
 
 // Vote Page
 app.get("/poll/:id", (req, res) => {
-  res.render("poll");
+    res.render("poll");
 });
 
 // Post vote
@@ -118,12 +118,12 @@ app.post("/logout", (req, res) => {
 
 // Thank you page
 app.get("/thankyou", (req, res) => {
-  res.render("thankyou");
+    res.render("thankyou");
 });
 
 // The 404 route
 app.get('*', function(req, res) {
-  res.status(404).render("page404");
+    res.status(404).render("page404");
 });
 
 app.listen(PORT, () => {

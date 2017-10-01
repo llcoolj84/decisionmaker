@@ -59,5 +59,7 @@ function newOption() {
     let $option = $("<li>").text($("#myInput").val()).addClass("list-option")
 
     $option.prependTo(".options-container");
+    $('#myInput').val('');
+    $('#myInput').focus()
 
 }
