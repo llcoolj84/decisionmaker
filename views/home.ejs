@@ -9,6 +9,8 @@
     <link rel="stylesheet" href="/styles/layout.css" type="text/css" />
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
 
+    <!-- <script src="path/to/sweet-alert.min.js"></script> -->
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <script type="text/javascript" src="/vendor/jquery-3.0.0.js"></script>
     <script type="text/javascript" src="/scripts/add-option-to-poll.js"></script>
     <script type="text/javascript" src="/scripts/home.js"></script>
@@ -17,7 +19,8 @@
 <body>
 
     <nav class="navbar sticky-top navbar-light bg-light">
-        <a class="navbar-brand">Poll Master</a>
+        <a href="#" class="navbar-left"><img src="/images/pollmaster.png" height=125px></a>
+        <!-- <a class="navbar-brand">Poll Master</a> -->
         <a href="https://www.google.ca">
             <form id='logout' action='/logout' method='POST'>
                 <button type="submit" class="btn btn-primary btn-lg">Logout</button>
@@ -47,8 +50,8 @@
             <div class="col-6">
                 <div class="card text-center">
                     <div class="card-body">
-                        <h3 class="card-title">Poll Master</h3>
-                        <h2 class="card-subtitle">Prepare your Choices!</h2>
+                        <!-- <h3 class="card-title">Poll Master</h3> -->
+                        <h2 class="card-subtitle">Create your Poll!</h2>
                         <br>
                         <form id='create_poll' action="/home" method="POST" id="needs-validation" novalidate>
                             <div>
@@ -72,9 +75,8 @@
                                 </div>
 
                                 <!--  -->
-                                <ul id="myUL">
                             </div>
-                            </ul>
+
                             <button type="submit" class="btn btn-primary btn-lg btn-block">Submit</button>
                         </form>
                         ////////////// ////////////

@@ -52,14 +52,29 @@ function newElement() {
 }
 // new option added when click "add" button
 
+//create poll item option
 function newOption() {
     //create container for options
     let $container = $("<div>").addClass("options-container");
     // append to container 
-    let $option = $("<li>").text($("#myInput").val()).addClass("list-option")
+    let $option = $("<li>").text($("#myInput").val()).addClass("list-option list-group-item");
 
-    $option.prependTo(".options-container");
-    $('#myInput').val('');
-    $('#myInput').focus()
+    var currentInput = $("#myInput").val();
+
+    if (currentInput.length === 0) {
+
+        swal({
+            title: 'Try again!',
+            text: '',
+            type: 'success',
+            icon: '/images/pollmaster-optionerror.jpg'
+        });
+
+    } else {
+
+        $option.prependTo(".options-container");;
+        $('#myInput').val('');
+        $('#myInput').focus()
+    }
 
 }

@@ -13,6 +13,7 @@
 </head>
 
 <body>
+
     <div class="container">
         <div class="row">
             <div class="col">
@@ -21,17 +22,17 @@
             <div class="col-6">
                 <font color=#f0f1ef>2 of 3 (wider)</font>
                 <h1>
-                    <font color=#f0f1ef>*logo goes here*</font>
+
+                    <a href="#" class="navbar-left"><img src="/images/pollmasterquote.png" height=400px></a>
+                    <!-- <a class="navbar-brand">Poll Master</a> -->
+
                 </h1>
-                <h1>Welcome To The Poll Master</h1>
-                <h2>Time To Choose!</h2>
-                <br>
-                <br>
+                <h2 align="center">Enter your email to begin your training!</h2>
                 <br>
                 <form action="/login" method="POST" class="form-group">
                     <div>
                         <label for="exampleFormControlInput1">Enter Email</label>
-                        <input name = "email" type="email" class="form-control" id="exampleFormControlInput1" placeholder="name@example.com">
+                        <input name="email" type="email" class="form-control" id="exampleFormControlInput1" placeholder="name@example.com">
                     </div>
                     <button type="submit" class="btn btn btn-success btn-lg btn-block">Login To Create Poll</button>
                 </form>

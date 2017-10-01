@@ -1,5 +1,32 @@
 $(() => {
 
+    //create poll item option
+    function newOption() {
+        //create container for options
+        let $container = $("<div>").addClass("options-container");
+        // append to container 
+        let $option = $("<li>").text($("#myInput").val()).addClass("list-option list-group-item");
+
+        var currentInput = $("#myInput").val();
+
+        if (currentInput.length === 0) {
+
+            swal({
+                title: 'Try again!',
+                text: '',
+                type: 'success',
+                icon: '/images/pollmaster-optionerror.jpg'
+            });
+
+        } else {
+
+            $option.prependTo(".options-container");;
+            $('#myInput').val('');
+            $('#myInput').focus()
+        }
+
+    }
+
     //create a new link for the poll and results
 
     function createPollLinks(key) {
@@ -67,9 +94,20 @@ $(() => {
 
         if (title.length === 0 || optionArray.length < 2) {
 
-            alert("Please include a poll Title and 2 options to submit");
-
+            swal({
+                title: 'Try again!',
+                text: '',
+                type: 'success',
+                icon: '/images/pollmaster-formalert.jpg'
+            });
         } else {
+
+            swal({
+                title: 'Your links are being prepared!',
+                text: '',
+                type: 'success',
+                icon: '/images/pollmaster-success.jpg'
+            });
 
             // insert the body of the submit to db using ajax and knex
             $.ajax({
@@ -78,15 +116,13 @@ $(() => {
                 data: JSON.stringify(newPoll),
                 contentType: "application/json"
             }).done
-
             createPollLinks(pollKey);
 
+            $('.options-container').reset(); // this is not working.  it's not clearing options results
             this.reset();
+            $('#myInput').val('');
         }
 
     });
-
-    $('.poll-title').focus();
-
 
 });

@@ -38,7 +38,12 @@ $(function() {
 
         first_name = $('#first-name').val();
         if (first_name.length === 0) {
-            return alert("Please enter your first name.");
+            swal({
+                title: 'Try again!',
+                text: '',
+                type: 'success',
+                icon: '/images/pollmaster-enternameerror.jpg'
+            });
         }
 
         votes = [];
