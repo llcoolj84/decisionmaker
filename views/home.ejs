@@ -50,7 +50,7 @@
                         <h3 class="card-title">Poll Master</h3>
                         <h2 class="card-subtitle">Prepare your Choices!</h2>
                         <br>
-                        <form id='create_poll' action="/home" method="POST">
+                        <form id='create_poll' action="/home" method="POST" id="needs-validation" novalidate>
                             <div>
                                 <label for="exampleInputEmail1"></label>
                                 <input id="poll_title" type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Title goes here">
@@ -58,16 +58,16 @@
                             </div>
                             <div>
                                 <label for="exampleTextarea"></label>
-                                <textarea class="form-control description" id="exampleTextarea description" type="text" rows="3" placeholder="Description"></textarea>
+                                <textarea class="form-control description" id="description" type="text" rows="3" placeholder="Description"></textarea>
                                 <small id="emailHelp" class="form-text text-muted">"Never try to prove what nobody doubts."</small>
                             </div>
                             <div id="myDIV" class="header">
                                 <br>
-                                <input type="text" id="myInput" placeholder="Add option" class="form-control">
+                                <input type="text" id="myInput" placeholder="Add at least 2 options" class="form-control">
                                 <span onclick="newOption()" class="btn btn-secondary">Add</span>
                                 <!--  -->
                                 <div class="options-container">
-                                    <li class="list-option">OPTION A</li>
+
 
                                 </div>
 
@@ -77,11 +77,12 @@
                             </ul>
                             <button type="submit" class="btn btn-primary btn-lg btn-block">Submit</button>
                         </form>
+                        ////////////// ////////////
                         <br>
                         <div id='links'>
                             <p>links go here</p>
                         </div>
-                        <h4 class="card-title"><a href="/">Poll Master</a></h4>
+                        <!-- <h4 class="card-title"><a href="/">Poll Master</a></h4> -->
                     </div>
                     <div class="card-footer text-muted">
                         Made with ❤️ and 💪
