@@ -39,7 +39,7 @@ module.exports = (knex) => {
       .select("polls.title", "polls.description", "options.name", "options.id")
       .from("polls")
       .join("options", "polls.id", "=", "options.poll_id")
-      .where({randomkey: req.params.id})
+      .where({"polls.randomkey": req.params.id})
       .then((rows) => {
         let pollInfo = {
           title: rows[0].title,
