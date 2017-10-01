@@ -39,6 +39,8 @@ module.exports = (knex) => {
       .from("options")
       .join("polls", "polls.id", "=", "options.poll_id")
       .join("answers", "answers.option_id", "=", "options.id")
+      .join("users", "polls.user_id", "=", "users.id")
+      .where({"users.id": req.session.user_id})
       .then((rows) => {
         let allHistoryPolls = [];
         rows.forEach((eachRow) => {
@@ -46,11 +48,40 @@ module.exports = (knex) => {
             allHistoryPolls.push({
               title: eachRow.title,
               description: eachRow.description,
-              poll_options: [],
+              poll_options: [{
+                option_id: eachRow.id,
+                option_name: eachRow.name,
+                score: eachRow.score
+              }],
               vote_link: "/poll/" + eachRow.randomkey
             })
+          } else {
+            let isSamePoll = false;
+            // If same poll
+            allHistoryPolls.forEach((eachUniquePoll, index) => {
+              if (eachUniquePoll.vote_link === "/poll/" + eachRow.randomkey) {
+                isSamePoll = true;
+                eachUniquePoll.poll_options.push({
+                  option_id: eachRow.id,
+                  option_name: eachRow.name,
+                  score: eachRow.score
+                });
+              }
+            });
+            //If not same poll
+            if (!isSamePoll) {
+              allHistoryPolls.push({
+                title: eachRow.title,
+                description: eachRow.description,
+                poll_options: [{
+                  option_id: eachRow.id,
+                  option_name: eachRow.name,
+                  score: eachRow.score
+                }],
+                vote_link: "/poll/" + eachRow.randomkey
+              })
+            }
           }
-          //More to work on...
 
         });
 
