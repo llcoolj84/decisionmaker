@@ -4,7 +4,7 @@ $(() => {
     function newOption() {
         //create container for options
         let $container = $("<div>").addClass("options-container");
-        // append to container 
+        // append to container
         let $option = $("<li>").text($("#myInput").val()).addClass("list-option list-group-item");
 
         var currentInput = $("#myInput").val();
@@ -123,6 +123,11 @@ $(() => {
             $('#myInput').val('');
         }
 
+    });
+
+    $("#logoutButton").on('click', function (event) {
+      event.preventDefault();
+      $.post("/logout").done;
     });
 
 });

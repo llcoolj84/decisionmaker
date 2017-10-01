@@ -102,12 +102,22 @@ app.get("/poll/:id", (req, res) => {
 
 // Post vote
 app.post("/poll/:id", (req, res) => {
-    res.render("/poll/:id");
+    res.render("/poll");
 });
 
 // History page
 app.get("/history", (req, res) => {
-    res.render("history");
+  knex.select("*").from("users").where({ id: req.session.user_id }).limit(1)
+  .then((result) => { // If there is cookie
+      if (result.length === 0) {
+          res.redirect("/login");
+      } else {
+        res.render("history");
+      }
+  })
+  .catch((error) => { //Handle no cookie
+      res.redirect("login");
+  });
 });
 
 // Logout page

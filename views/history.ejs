@@ -17,9 +17,10 @@
     <nav class="navbar sticky-top navbar-light bg-light">
         <a href="#" class="navbar-left"><img src="/images/pollmaster.png" height=125px></a>
         <!-- <a class="navbar-brand">Poll Master</a> -->
-        <a href="/home">
-            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Create New Poll</button>
-        </a>
+        <form class="form-inline">
+          <a href="/home" class="btn btn-outline-success mr-sm-2">Create New Poll</a>
+          <a id="logoutButton" href="#" class="btn btn-outline-danger">Logout</a>
+        </form>
     </nav>
     <div class="container">
         <div class="row">
@@ -47,6 +48,9 @@
                     <button id="results" class="list-group-item list-group-item-action" disabled>Results</button>
                     <button id="vote_link" class="list-group-item list-group-item-action" disabled>Vote Link</button> -->
                 </div>
+                <br>
+                <br>
+                <br>
             </div>
             <div class="col">
                 3 of 3

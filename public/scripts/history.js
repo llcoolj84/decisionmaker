@@ -24,7 +24,7 @@ $(() => {
     })
 
     // create results and append to container
-    let $results = $("<button>").addClass("list-group-item list-group-item-action")
+    let $results = $("<button>").addClass("list-group-item list-group-item-action text-success")
         .attr('id', 'results').append($("<h5>").text("Winner is: ").append($("<strong>").text(pollHistory.winner + " ✔️")));
 
     $container.append($results);
@@ -94,5 +94,10 @@ $(() => {
   }
 
   loadHistory();
+
+  $("#logoutButton").on('click', function (event) {
+    event.preventDefault();
+    $.post("/logout").done;
+  });
 
 });
