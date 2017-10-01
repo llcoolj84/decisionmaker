@@ -15,7 +15,7 @@ $(() => {
                 title: 'Try again!',
                 text: '',
                 type: 'success',
-                icon: '/images/pollmaster-optionerror.jpg'
+                icon: '/images/pollmaster-optionerror.png'
             });
 
         } else {
@@ -98,7 +98,7 @@ $(() => {
                 title: 'Try again!',
                 text: '',
                 type: 'success',
-                icon: '/images/pollmaster-formalert.jpg'
+                icon: '/images/pollmaster-formalert.png'
             });
         } else {
 
@@ -115,7 +115,17 @@ $(() => {
                 url: "/api/polls",
                 data: JSON.stringify(newPoll),
                 contentType: "application/json"
-            }).done
+            }).done(function() { // .done for ajax HTTP request
+                // window.location.href = "/" + pollKey + "/mailout";
+                window.location.href = "/mailout";
+            });
+            // $.ajax({
+            //     method: "GET"
+            // }).done(function() { // .done for ajax HTTP request
+            //     // window.location.href = "/" + pollKey + "/mailout";
+            //     window.location.href = "/mailout";
+            // });
+
             createPollLinks(pollKey);
 
             $('.options-container').reset(); // this is not working.  it's not clearing options results

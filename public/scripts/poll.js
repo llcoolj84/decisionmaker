@@ -38,7 +38,7 @@ $(function() {
 
         first_name = $('#first-name').val();
         if (first_name.length === 0) {
-            swal({
+            return swal({
                 title: 'Try again!',
                 text: '',
                 type: 'success',
@@ -60,7 +60,12 @@ $(function() {
             });
         });
         if (passDotEach === false) {
-            return alert("Please rank your choices using 1, 2, 3 etc.");
+            return swal({
+                title: 'Try again!',
+                text: '',
+                type: 'success',
+                icon: '/images/pollmaster-rankchoiceserror.jpg'
+            });
         }
 
         var oneAnswer = {
