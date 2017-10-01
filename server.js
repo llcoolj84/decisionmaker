@@ -102,7 +102,12 @@ app.get("/poll/:id", (req, res) => {
 
 // Post vote
 app.post("/poll/:id", (req, res) => {
-    res.render("/poll/:id");
+    res.render("/poll");
+});
+
+// Mailout/Congratulations page
+app.get("/:id/mailout", (req, res) => {
+    res.render("mailout");
 });
 
 // History page
@@ -120,6 +125,28 @@ app.post("/logout", (req, res) => {
 app.get("/thankyou", (req, res) => {
     res.render("thankyou");
 });
+
+app.post("/contact"), (req, res) => {
+    var api_key = 'key-bc656a3e6c471e451a2c72a81a2c9b6c';
+    var domain = 'sandbox323fe1e01115490da0cf05522a958c8d.mailgun.org';
+    var mailgun = require('mailgun-js')({ apiKey: api_key, domain: domain });
+
+    var data = {
+        from: 'The Poll Master <postmaster@sandbox323fe1e01115490da0cf05522a958c8d.mailgun.org>',
+        to: 'saskpractice@gmail.com', //this should be the current user email that they entered
+        subject: 'Your poll link', // this should also include the "title" of the poll  
+        text: 'Here is your link.  Share with your friends, it is time to Choose!!'
+    };
+
+    mailgun.messages().send(data, function(error, body) {
+        console.log(body);
+        if (!error) {
+            res.send('Link Sent!');
+        } else {
+            res.send('Link email not sent');
+        }
+    });
+}
 
 // The 404 route
 app.get('*', function(req, res) {

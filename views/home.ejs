@@ -21,14 +21,12 @@
     <nav class="navbar sticky-top navbar-light bg-light">
         <a href="#" class="navbar-left"><img src="/images/pollmaster.png" height=125px></a>
         <!-- <a class="navbar-brand">Poll Master</a> -->
-        <a href="https://www.google.ca">
-            <form id='logout' action='/logout' method='POST'>
-                <button type="submit" class="btn btn-primary btn-lg">Logout</button>
-            </form>
-            <br>
-            <form id='history' action='/history' method='GET'>
-                <button type="submit" class="btn btn-secondary">History</button>
-            </form>
+        <!-- <a href="https://www.google.ca"> -->
+        <form id='logout' action='/logout' method='POST'>
+            <button type="submit" class="btn btn-primary btn-lg" style="position: absolute;right:0;top:0">Logout</button>
+        </form>
+        <br>
+        <a href="/history"><button type="submit" class="btn btn-secondary">History</button></a>
         </a>
     </nav>
     <div class="container">

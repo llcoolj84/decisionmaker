@@ -67,7 +67,7 @@ function newOption() {
             title: 'Try again!',
             text: '',
             type: 'success',
-            icon: '/images/pollmaster-optionerror.jpg'
+            icon: '/images/pollmaster-optionerror.png'
         });
 
     } else {
