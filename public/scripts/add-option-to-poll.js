@@ -50,3 +50,14 @@ function newElement() {
         }
     }
 }
+// new option added when click "add" button
+
+function newOption() {
+    //create container for options
+    let $container = $("<div>").addClass("options-container");
+    // append to container 
+    let $option = $("<li>").text($("#myInput").val()).addClass("list-option")
+
+    $option.prependTo(".options-container");
+
+}

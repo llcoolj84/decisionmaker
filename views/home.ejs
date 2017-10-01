@@ -7,9 +7,7 @@
     <link rel="stylesheet" href="/vendor/normalize-4.1.1.css" type="text/css" />
     <link rel="stylesheet" href="/vendor/border-box.css" type="text/css" />
     <link rel="stylesheet" href="/styles/layout.css" type="text/css" />
-    <!-- <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap-theme.min.css"> -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
-
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
 
     <script type="text/javascript" src="/vendor/jquery-3.0.0.js"></script>
     <script type="text/javascript" src="/scripts/add-option-to-poll.js"></script>
@@ -17,80 +15,81 @@
 </head>
 
 <body>
+
     <nav class="navbar sticky-top navbar-light bg-light">
         <a class="navbar-brand">Poll Master</a>
-        <a href="/login">
+        <a href="https://www.google.ca">
             <form id='logout' action='/logout' method='POST'>
                 <button type="submit" class="btn btn-primary btn-lg">Logout</button>
             </form>
+            <br>
             <form id='history' action='/history' method='GET'>
                 <button type="submit" class="btn btn-secondary">History</button>
             </form>
         </a>
-
     </nav>
     <div class="container">
         <div class="row">
             <div class="col">
-
-                <font color=#f0f1ef>1 of 3</font>
+                1 of 3
             </div>
             <div class="col">
-                <font color=#f0f1ef>2 of 3 (wider)</font>
-                <h1>
-                    <font color=#f0f1ef>*logo goes here*</font>
-                </h1>
-                <h1>The Poll Master</h1>
-                <h2>Create Your Poll</h2>
-                <br>
-                <br>
-                <br>
-                <br>
-                <!-- list building code goes here -->
-                <div class="container">
-                    <div class="col">
-                        <font color=#f0f1ef>3 of 3</font>
+                2 of 3
+            </div>
+            <div class="col">
+                3 of 3
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                1 of 3
+            </div>
+            <div class="col-6">
+                <div class="card text-center">
+                    <div class="card-body">
+                        <h3 class="card-title">Poll Master</h3>
+                        <h2 class="card-subtitle">Prepare your Choices!</h2>
+                        <br>
+                        <form id='create_poll' action="/home" method="POST">
+                            <div>
+                                <label for="exampleInputEmail1"></label>
+                                <input id="poll_title" type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Title goes here">
+                                <small id="emailHelp" class="form-text text-muted">"a wise man creates short descriptive titles"</small>
+                            </div>
+                            <div>
+                                <label for="exampleTextarea"></label>
+                                <textarea class="form-control description" id="exampleTextarea description" type="text" rows="3" placeholder="Description"></textarea>
+                                <small id="emailHelp" class="form-text text-muted">"Never try to prove what nobody doubts."</small>
+                            </div>
+                            <div id="myDIV" class="header">
+                                <br>
+                                <input type="text" id="myInput" placeholder="Add option" class="form-control">
+                                <span onclick="newOption()" class="btn btn-secondary">Add</span>
+                                <!--  -->
+                                <div class="options-container">
+                                    <li class="list-option">OPTION A</li>
+
+                                </div>
+
+                                <!--  -->
+                                <ul id="myUL">
+                            </div>
+                            </ul>
+                            <button type="submit" class="btn btn-primary btn-lg btn-block">Submit</button>
+                        </form>
+                        <br>
+                        <div id='links'>
+                            <p>links go here</p>
+                        </div>
+                        <h4 class="card-title"><a href="/">Poll Master</a></h4>
+                    </div>
+                    <div class="card-footer text-muted">
+                        Made with ❤️ and 💪
                     </div>
                 </div>
             </div>
-        </div>
-    </div>
-    </div>
-    <div class="row">
-        <div class="col">
-            <font color=#f0f1ef>1 of 3</font>
-        </div>
-        <div class="col">
-            <form id='create_poll' action="/home" method="POST">
-                <div>
-                    <input id="poll_title" class="title" type="text" class="form-control" placeholder="Title">
-                </div>
-                <div>
-                    <input id="description" class="description" type="text" class="form-control" placeholder="Description">
-                </div>
-                <div id="myDIV" class="header">
-                    <!-- <h2> Poll Title </h2> -->
-                    <br>
-                    <input type="text" id="myInput" placeholder="Add option">
-                    <span onclick="newElement()" class="addBtn">Add</span>
-                    <ul id="myUL">
-                </div>
-                </ul>
-                <button type="submit" class="btn btn-secondary btn-lg">Submit</button>
-            </form>
-            <div id='links'>
-                <p>links go here</p>
+            <div class="col">
+                3 of 3
             </div>
-            <font color=#f0f1ef>2 of 3 (wider)</font>
-        </div>
-        <div class="col">
-            <font color=#f0f1ef>3 of 3</font>
         </div>
     </div>
-    </div>
-
-
-
-</body>
-
-</html>
