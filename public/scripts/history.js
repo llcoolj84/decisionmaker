@@ -5,12 +5,13 @@ $(() => {
     let $container = $("<div>").addClass("list_results");
     // create title and append to container
     let $title = $("<button>").addClass("list-group-item list-group-item-action active")
-        .attr('id', 'title').text(pollHistory.title);
+        .attr('id', 'title').append($("<h4>").text("Poll Title: ").append($("<strong>").text(pollHistory.title)));
 
     $container.append($title);
     // create description and append to container
     let $description = $("<button>").addClass("list-group-item list-group-item-action")
-        .attr('id', 'description').attr('disabled', "").text(pollHistory.description);
+        // .attr('id', 'description').attr('disabled', "").text(pollHistory.description);
+        .attr('id', 'description').attr('disabled', "").text("Total score for each option:");
 
     $container.append($description);
 
@@ -24,17 +25,21 @@ $(() => {
 
     // create results and append to container
     let $results = $("<button>").addClass("list-group-item list-group-item-action")
-        .attr('id', 'results').attr('disabled', "").text(pollHistory.winner + '     ' + '✔️');
+        .attr('id', 'results').append($("<h5>").text("Winner is: ").append($("<strong>").text(pollHistory.winner + " ✔️")));
 
     $container.append($results);
 
     // create vote link and append to container
-    let $voteLink = $("<button>").addClass("list-group-item list-group-item-action")
-        .attr('id', 'vote_link').html(pollHistory.vote_link);
+    let $voteLink = $("<a>").addClass("list-group-item list-group-item-action")
+        .attr('id', 'vote_link').attr('href', pollHistory.vote_link).attr("target", "_blank").append($("<u>").text("The link to vote is here."));
+        // .html(pollHistory.vote_link);
     $container.append($voteLink);
 
     //take container and prepend to #history-col
     $container.prependTo("#history-col");
+
+    // add an empty line between each poll result
+    $("<br>").prependTo("#history-col");
   }
 
   function reduce_borda_count(inputArr) {
