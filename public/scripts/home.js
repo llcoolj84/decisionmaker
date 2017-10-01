@@ -11,8 +11,8 @@ $(() => {
         var link1 = $("<a>Link to Poll</a>").attr('href', result1);
         $('#links').append(link1).append('<br>');
 
-        var link2 = $("<a>Link to Results</a>").attr('href', result2);
-        $('#links').append(link2).append('<br>');
+        // var link2 = $("<a>Link to Results</a>").attr('href', result2);
+        // $('#links').append(link2).append('<br>');
 
     }
 
