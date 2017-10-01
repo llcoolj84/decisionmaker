@@ -31,5 +31,33 @@ module.exports = (knex) => {
       });
   })
 
+  // get from /api/answers
+  router.get("/", (req, res) => {
+
+    knex
+      .select("polls.randomkey", "polls.title", "polls.description", "options.name", "options.id", "answers.score")
+      .from("options")
+      .join("polls", "polls.id", "=", "options.poll_id")
+      .join("answers", "answers.option_id", "=", "options.id")
+      .then((rows) => {
+        let allHistoryPolls = [];
+        rows.forEach((eachRow) => {
+          if (allHistoryPolls.length === 0) {
+            allHistoryPolls.push({
+              title: eachRow.title,
+              description: eachRow.description,
+              poll_options: [],
+              vote_link: "/poll/" + eachRow.randomkey
+            })
+          }
+          //More to work on...
+
+        });
+
+        res.json(allHistoryPolls);
+    });
+
+  })
+
   return router;
 }
