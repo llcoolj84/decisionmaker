@@ -81,8 +81,8 @@ module.exports = (knex) => {
                 vote_link: "/poll/" + eachRow.randomkey
               })
             }
-          }
 
+          }
         });
 
         res.json(allHistoryPolls);
