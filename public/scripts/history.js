@@ -66,79 +66,28 @@ $(() => {
     return name;
   }
 
-  // singlePollAnswers comes from DB using ajax GET method
-  let singlePollAnswers = [
-    { option_id: 11, option_name: "Apple", score: 2 },
-    { option_id: 12, option_name: "Banana", score: 1 },
-    { option_id: 11, option_name: "Apple", score: 1 },
-    { option_id: 12, option_name: "Banana", score: 2 },
-    { option_id: 11, option_name: "Apple", score: 1 },
-    { option_id: 12, option_name: "Banana", score: 2 },
-    { option_id: 11, option_name: "Apple", score: 1 },
-    { option_id: 12, option_name: "Banana", score: 2 },
-    { option_id: 11, option_name: "Apple", score: 1 },
-    { option_id: 12, option_name: "Banana", score: 2 },
-    { option_id: 11, option_name: "Apple", score: 1 },
-    { option_id: 12, option_name: "Banana", score: 2 },
-    { option_id: 11, option_name: "Apple", score: 1 },
-    { option_id: 12, option_name: "Banana", score: 2 },
-    { option_id: 11, option_name: "Apple", score: 2 },
-    { option_id: 12, option_name: "Banana", score: 1 },
-    { option_id: 11, option_name: "Apple", score: 1 },
-    { option_id: 12, option_name: "Banana", score: 2 },
-    { option_id: 11, option_name: "Apple", score: 1 },
-    { option_id: 12, option_name: "Banana", score: 2 },
-    { option_id: 11, option_name: "Apple", score: 1 },
-    { option_id: 12, option_name: "Banana", score: 2 },
-    { option_id: 11, option_name: "Apple", score: 1 },
-    { option_id: 12, option_name: "Banana", score: 2 },
-    { option_id: 11, option_name: "Apple", score: 1 },
-    { option_id: 12, option_name: "Banana", score: 2 },
-    { option_id: 11, option_name: "Apple", score: 1 },
-    { option_id: 12, option_name: "Banana", score: 2 },
-    { option_id: 11, option_name: "Apple", score: 1 },
-    { option_id: 12, option_name: "Banana", score: 2 },
-    { option_id: 11, option_name: "Apple", score: 1 },
-    { option_id: 12, option_name: "Banana", score: 2 },
-    { option_id: 11, option_name: "Apple", score: 1 },
-    { option_id: 12, option_name: "Banana", score: 2 }
-  ];
-
-  var poll_options = reduce_borda_count(singlePollAnswers);
-
-  let theWinner = winner(poll_options);
-
-  var singlePollHistory = {
-      title: "TTT",
-      description: "ddddddddddddddddddddddddd",
-      poll_options: poll_options,
-      winner: theWinner,
-      vote_link: "http://www.google.ca"
-  };
-
-  createPollElement(singlePollHistory);
-  createPollElement(singlePollHistory);
-
+  var loadHistory = function() {
     $.ajax({
         type: "GET",
         url: "/api/answers/",
         dataType: 'json',
     }).done((historyPolls) => {
-        // createElements(onePoll);
+      historyPolls.forEach(function (eachPoll) {
+        console.log(eachPoll);
+        var poll_options = reduce_borda_count(eachPoll.poll_answers);
+        var theWinner = winner(poll_options);
+        var singlePollHistory = {
+          title: eachPoll.title,
+          description: eachPoll.description,
+          poll_options: poll_options,
+          winner: theWinner,
+          vote_link: eachPoll.vote_link
+        };
+        createPollElement(singlePollHistory);
+      })
     });
+  }
 
-  // var loadPoll = function() {
-  //   var currentPath = window.location.pathname;
-  //   var randomKey = currentPath.substr(currentPath.lastIndexOf('/') + 1); // randomKey is last segment of currentPath
-  //   $.ajax({
-  //       type: "GET",
-  //       url: "/api/polls/" + randomKey,
-  //       dataType: 'json',
-  //   }).done((onePoll) => {
-  //       createElements(onePoll);
-  //   });
-  // };
-
-  // loadPoll();
+  loadHistory();
 
 });

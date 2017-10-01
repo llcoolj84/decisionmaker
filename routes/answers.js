@@ -48,7 +48,7 @@ module.exports = (knex) => {
             allHistoryPolls.push({
               title: eachRow.title,
               description: eachRow.description,
-              poll_options: [{
+              poll_answers: [{
                 option_id: eachRow.id,
                 option_name: eachRow.name,
                 score: eachRow.score
@@ -61,7 +61,7 @@ module.exports = (knex) => {
             allHistoryPolls.forEach((eachUniquePoll, index) => {
               if (eachUniquePoll.vote_link === "/poll/" + eachRow.randomkey) {
                 isSamePoll = true;
-                eachUniquePoll.poll_options.push({
+                eachUniquePoll.poll_answers.push({
                   option_id: eachRow.id,
                   option_name: eachRow.name,
                   score: eachRow.score
@@ -73,7 +73,7 @@ module.exports = (knex) => {
               allHistoryPolls.push({
                 title: eachRow.title,
                 description: eachRow.description,
-                poll_options: [{
+                poll_answers: [{
                   option_id: eachRow.id,
                   option_name: eachRow.name,
                   score: eachRow.score
