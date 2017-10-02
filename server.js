@@ -19,7 +19,7 @@ app.use(cookieSession({ keys: ['thisisTedKey', 'ThisisLHLKey'] })); // set secre
 // const authen = require('./utils/authen-helper'); // Authentication helper
 
 // Seperated Routes for each Resource
-const usersRoutes = require("./routes/users");
+// const usersRoutes = require("./routes/users");
 const pollsRoutes = require("./routes/polls");
 const answersRoutes = require("./routes/answers");
 
@@ -43,7 +43,7 @@ app.use("/styles", sass({
 app.use(express.static("public"));
 
 // Mount all resource routes
-app.use("/api/users", usersRoutes(knex));
+// app.use("/api/users", usersRoutes(knex));
 app.use("/api/polls", pollsRoutes(knex));
 app.use("/api/answers", answersRoutes(knex));
 
