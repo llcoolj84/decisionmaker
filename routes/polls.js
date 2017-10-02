@@ -5,32 +5,43 @@ const router = express.Router();
 
 module.exports = (knex) => {
 
-    // post to /api/polls
-    router.post("/", (req, res) => {
+  // post to /api/polls
+  router.post("/", (req, res) => {
 
-        const randomkey = req.body.pollKey;
-        const title = req.body.title;
-        const description = req.body.description;
-        const optionArray = req.body.optionArray;
+    const randomkey = req.body.pollKey;
+    const title = req.body.title;
+    const description = req.body.description;
+    const optionArray = req.body.optionArray;
 
+    knex
+      .insert({ randomkey: randomkey, title: title, description: description, user_id: req.session.user_id })
+      .into("polls")
+      .returning('id')
+      .then((id) => {
+        // console.log(id);
+        let multiRow = [];
+        optionArray.forEach((eachOption) => {
+            multiRow.push({ name: eachOption, poll_id: id[0] })
+        })
         knex
-            .insert({ randomkey: randomkey, title: title, description: description, user_id: req.session.user_id })
-            .into("polls")
-            .returning('id')
-            .then((id) => {
-                // console.log(id);
-                let multiRow = [];
-                optionArray.forEach((eachOption) => {
-                    multiRow.push({ name: eachOption, poll_id: id[0] })
-                })
-                knex
-                    .insert(multiRow)
-                    .into("options")
-                    .then((result) => {
-                        res.status(200).json(result);
-                    });
-            })
-    });
+          .insert(multiRow)
+          .into("options")
+          .returning('id')
+          .then((id) => {
+            // insert 0 scores for these options (no voter_id so that we know these answers are not from voter)
+            let multiZeroScores = [];
+            id.forEach((eachOptionId, index) => {
+              multiZeroScores.push({score: 0, option_id: id[index]});
+            });
+            knex
+              .insert(multiZeroScores)
+              .into("answers")
+              .then((result) => {
+                res.status(200).json(result); // has to send back something otherwise the ajax .done won't be triggered.
+              });
+          });
+      })
+  });
 
     // get from /api/polls/:id
     router.get("/:id", (req, res) => {

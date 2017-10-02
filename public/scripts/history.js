@@ -23,9 +23,13 @@ $(() => {
         $poll_options.appendTo($container);
     })
 
-    // create results and append to container
-    let $results = $("<button>").addClass("list-group-item list-group-item-action text-success")
-        .attr('id', 'results').append($("<h5>").text("Winner is: ").append($("<strong>").text(pollHistory.winner + " ✔️")));
+    // create winner and append to container
+    let $results = $("<button>").addClass("list-group-item list-group-item-action text-success").attr('id', 'results')
+    if (pollHistory.winner.length === 0) {
+      $results.append($("<h5>").text("Waiting for voting result..."));
+    } else {
+      $results.append($("<h5>").text("Winner is: ").append($("<strong>").text(pollHistory.winner + " ✔️")));
+    }
 
     $container.append($results);
 

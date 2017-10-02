@@ -22,12 +22,12 @@ module.exports = (knex) => {
         votes.forEach((eachVote) => {
           multiRow.push({voter_id: id[0], score: eachVote.score, option_id: eachVote.optionId})
         })
-      knex
-        .insert(multiRow)
-        .into("answers")
-        .then((result) => {
-          res.status(200).json(result); // has to send back something otherwise the ajax .done won't be triggered.
-        });
+        knex
+          .insert(multiRow)
+          .into("answers")
+          .then((result) => {
+            res.status(200).json(result); // has to send back something otherwise the ajax .done won't be triggered.
+          });
       });
   })
 
