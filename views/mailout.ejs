@@ -11,39 +11,47 @@
 
     <script type="text/javascript" src="/vendor/jquery-3.0.0.js"></script>
     <script type="text/javascript" src="/scripts/mailout.js"></script>
+    <script src="dist/clipboard.min.js"></script>
 </head>
 
 <body>
     <nav class="navbar sticky-top navbar-light bg-light">
         <!-- <a class="navbar-brand">Poll Master</a> -->
         <a href="#" class="navbar-left"><img src="/images/pollmaster.png" height=125px></a>
-        <a href="https://www.google.ca">
-            <button class="btn btn-outline-danger my-2 my-sm-0" type="submit">Exit</button>
+
         </a>
+        <form class="form-inline">
+            <a href="/history" class="btn btn-outline-success mr-sm-2">History</a>
+            <a id="logoutButton" href="#" class="btn btn-outline-danger">Logout</a>
+        </form>
     </nav>
     <div class="container">
         <div class="row">
             <div class="col">
-                1 of 3
+                <!-- 1 of 3 -->
             </div>
             <div class="col">
-                2 of 3
+                <!-- 2 of 3 -->
             </div>
             <div class="col">
-                3 of 3
+                <!-- 3 of 3 -->
             </div>
         </div>
         <div class="row">
             <div class="col">
-                1 of 3
+                <!-- 1 of 3 -->
             </div>
             <div class="col-6">
                 <div class="card text-center">
                     <div class="card-body">
-                        <a href="#" class="navbar-left"><img src="/images/pollmaster-congratulations.png" height=325px></a>
+                        <a href="#" class="navbar-left"><img src="/images/pollmaster-congratulations(1link).png" height=325px></a>
                     </div>
                     <div id='links'>
-                        <p>links go here</p>
+                        <div class="panel panel-default">
+                            <div class="panel-body">
+                            </div>
+                        </div>
+                        <!-- <p>Links Go Here</p> -->
                     </div>
                     <div class="card-footer text-muted">
                         Made with ❤️ and 💪
@@ -51,7 +59,7 @@
                 </div>
             </div>
             <div class="col">
-                3 of 3
+                <!-- 3 of 3 -->
             </div>
         </div>
     </div>
