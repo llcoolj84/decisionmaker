@@ -28,4 +28,9 @@ $(() => {
         console.log(result);
     });
 
+    $("#logoutButton").on('click', function (event) {
+      $.post("/logout").done(function () {
+        window.location.href = "/"
+      });
+    });
 });

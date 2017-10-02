@@ -113,7 +113,7 @@ $(() => {
                 window.location.href = "/" + pollKey + "/mailout";
             });
 
-            createPollLinks(pollKey);
+            // createPollLinks(pollKey);
             this.reset();
             $('#myInput').val('');
         }
