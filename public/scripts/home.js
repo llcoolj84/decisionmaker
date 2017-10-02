@@ -44,15 +44,6 @@ $(() => {
 
     }
 
-    // function successAlert() {
-
-    //           var alerSuccess = $("<div class='alert alert-success' role='alert'">
-    //           <strong>Well done!</strong> You successfully read this important alert message.
-    //         </div>");
-    //           $('#links').append(link1).append('<br>');
-
-    //       }
-
     //Generate Random String
     function generateRandomString() {
         const abcset = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"; // 62 characters
@@ -86,11 +77,6 @@ $(() => {
         for (var i = 0; i < $("li.list-option").length; i++) {
             optionArray.push($("li.list-option")[i].innerHTML);
         }
-        console.log(title);
-        console.log(description);
-        console.log(optionArray);
-        console.log(pollKey);
-        console.log(newPoll);
 
         if (title.length === 0 || optionArray.length < 2) {
 
@@ -117,14 +103,8 @@ $(() => {
                 contentType: "application/json"
             }).done(function() { // .done for ajax HTTP request
                 // window.location.href = "/" + pollKey + "/mailout";
-                window.location.href = "/mailout";
+                window.location.href = "/" + pollKey + "/mailout";
             });
-            // $.ajax({
-            //     method: "GET"
-            // }).done(function() { // .done for ajax HTTP request
-            //     // window.location.href = "/" + pollKey + "/mailout";
-            //     window.location.href = "/mailout";
-            // });
 
             createPollLinks(pollKey);
 

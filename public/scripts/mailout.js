@@ -1,46 +1,41 @@
 $(() => {
 
-    $('#create_poll').on("submit", function(event) {
 
-            event.preventDefault(); //Prevent default action (prevent post to /home)
 
-            // collect the body of the submit - to be done
+    function createPollLinks(key) {
 
-            var title = $("#poll_title").val();
-            var description = $("#description").val();
-            var optionArray = [];
-            var pollKey = generateRandomString();
-            var newPoll = {
-                optionArray: optionArray,
-                title: title,
-                description: description,
-                pollKey: pollKey
-            };
+        var abc = window.location.href;
+        var newURL = window.location.protocol + "//" + window.location.host + "/" + window.location.pathname;
+        var pathArray = window.location.pathname.split('/');
+        var secondLevelLocation = pathArray[1];
+        var pollURL = "/poll/" + secondLevelLocation;
+        var resultURL = "/history/";
 
-            for (var i = 0; i < $("li.list-option").length; i++) {
-                optionArray.push($("li.list-option")[i].innerHTML);
-            }
-        }
+
+        var link1 = $("<a><h2>Link to Poll</h2></a>").attr('href', pollURL);
+        $('#links').append(link1).append('<br>');
+
+        // var link2 = $("<a>Link to Results</a>").attr('href', resultURL);
+        // $('#links').append(link2).append('<br>');
+
+    }
+    createPollLinks();
+
+    var clipboard = new Clipboard('.btn');
+
+    clipboard.on('success', function(e) {
+        console.info('Accion:', e.action);
+        console.info('Texto:', e.text);
+        console.info('Trigger:', e.trigger);
+
+        e.clearSelection();
     });
 
-console.log(title); console.log(description); console.log(optionArray); console.log(pollKey); console.log(newPoll);
+    clipboard.on('error', function(e) {
+        console.error('Accion:', e.action);
+        console.error('Trigger:', e.trigger);
+    });
 
 
-function createPollLinks(key) {
-
-    var pollURL = "/poll/";
-    var resultURL = "/result/";
-    var result1 = pollURL + key;
-    var result2 = resultURL + key;
-
-    var link1 = $("<a>Link to Poll</a>").attr('href', result1);
-    $('#links').append(link1).append('<br>');
-
-    // var link2 = $("<a>Link to Results</a>").attr('href', result2);
-    // $('#links').append(link2).append('<br>');
-
-}
-
-createPollLinks(pollKey);
 
 });
