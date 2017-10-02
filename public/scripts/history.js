@@ -96,8 +96,9 @@ $(() => {
   loadHistory();
 
   $("#logoutButton").on('click', function (event) {
-    event.preventDefault();
-    $.post("/logout").done;
+    $.post("/logout").done(function () {
+      window.location.href = "/"
+    });
   });
 
 });

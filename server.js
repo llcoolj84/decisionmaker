@@ -128,7 +128,8 @@ app.get("/history", (req, res) => {
 // Logout page
 app.post("/logout", (req, res) => {
     req.session = null; // clear cookie session
-    res.redirect("/login");
+    res.send('OK');
+    // res.redirect("/login");
 });
 
 // Thank you page
