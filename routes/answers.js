@@ -3,6 +3,18 @@
 const express = require('express');
 const router  = express.Router();
 
+// Mailgun
+const api_key = 'key-8cd516728c0e74a126eb84c864fd1fbf'; // From mailgun dashboard
+const DOMAIN = 'sandbox16ffa71b913047d78b5bac91866d244b.mailgun.org'; // From mailgun dashboard
+const mailgun = require('mailgun-js')({apiKey: api_key, domain: DOMAIN});
+
+const data = {
+  from: 'Mailgun Sandbox <postmaster@sandbox16ffa71b913047d78b5bac91866d244b.mailgun.org>',
+  to: 'Ted Yang <yangxiongtana1@gmail.com>',
+  subject: 'New vote',
+  text: 'A new vote has been casted!'
+};
+
 module.exports = (knex) => {
 
   // post to /api/answers
@@ -26,6 +38,9 @@ module.exports = (knex) => {
           .insert(multiRow)
           .into("answers")
           .then((result) => {
+            mailgun.messages().send(data, function (error, body) {
+              console.log(body);
+            });
             res.status(200).json(result); // has to send back something otherwise the ajax .done won't be triggered.
           });
       });
