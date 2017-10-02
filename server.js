@@ -148,7 +148,7 @@ app.post("/contact", (req, res) => {
         to: 'saskpractice@gmail.com', //this should be the current user email that they entered
         // to: 'saskpractice@gmail.com, yangxiongtan@gmail.com, scott.g.newson@gmail.com, gerritse.arie@gmail.com, bsrai91@gmail.com', //this should be the current user email that they entered
         subject: 'Your poll link', // this should also include the "title" of the poll
-        text: 'Here is your link: ' + link + 'Share with your friends, it is time to Choose!!'
+        text: 'Here is your link: http://' + link + ' Share with your friends, it is time to Choose!!'
     };
 
     mailgun.messages().send(data, function(error, body) {
