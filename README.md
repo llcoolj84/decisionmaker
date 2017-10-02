@@ -1,4 +1,4 @@
-# Node Skeleton
+# Poll Master App
 
 ## Project Setup
 
