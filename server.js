@@ -13,7 +13,6 @@ const knexConfig = require("./knexfile");
 const knex = require("knex")(knexConfig[ENV]);
 const morgan = require('morgan');
 const knexLogger = require('knex-logger');
-
 const cookieSession = require('cookie-session'); // Use Node.js cookie-session middleware
 app.use(cookieSession({ keys: ['thisisTedKey', 'ThisisLHLKey'] })); // set secret keys for cookie-session
 // const authen = require('./utils/authen-helper'); // Authentication helper
@@ -112,17 +111,17 @@ app.get("/:id/mailout", (req, res) => {
 
 // History page
 app.get("/history", (req, res) => {
-  knex.select("*").from("users").where({ id: req.session.user_id }).limit(1)
-  .then((result) => { // If there is cookie
-      if (result.length === 0) {
-          res.redirect("/login");
-      } else {
-        res.render("history");
-      }
-  })
-  .catch((error) => { //Handle no cookie
-      res.redirect("login");
-  });
+    knex.select("*").from("users").where({ id: req.session.user_id }).limit(1)
+        .then((result) => { // If there is cookie
+            if (result.length === 0) {
+                res.redirect("/login");
+            } else {
+                res.render("history");
+            }
+        })
+        .catch((error) => { //Handle no cookie
+            res.redirect("login");
+        });
 });
 
 // Logout page
@@ -137,7 +136,7 @@ app.get("/thankyou", (req, res) => {
     res.render("thankyou");
 });
 
-app.post("/contact"), (req, res) => {
+app.post("/contact", (req, res) => {
     var api_key = 'key-bc656a3e6c471e451a2c72a81a2c9b6c';
     var domain = 'sandbox323fe1e01115490da0cf05522a958c8d.mailgun.org';
     var mailgun = require('mailgun-js')({ apiKey: api_key, domain: domain });
@@ -157,7 +156,7 @@ app.post("/contact"), (req, res) => {
             res.send('Link email not sent');
         }
     });
-}
+});
 
 // The 404 route
 app.get('*', function(req, res) {

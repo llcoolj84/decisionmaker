@@ -1,5 +1,12 @@
 $(() => {
 
+    swal({
+        title: 'Let\'\s Begin!!',
+        text: '',
+        type: 'success',
+        icon: '/images/pollmaster-firsttask.png'
+    });
+
     //create poll item option
     function newOption() {
         //create container for options
@@ -107,18 +114,16 @@ $(() => {
             });
 
             createPollLinks(pollKey);
-
-            $('.options-container').reset(); // this is not working.  it's not clearing options results
             this.reset();
             $('#myInput').val('');
         }
 
     });
 
-    $("#logoutButton").on('click', function (event) {
-      $.post("/logout").done(function () {
-        window.location.href = "/"
-      });
+    $("#logoutButton").on('click', function(event) {
+        $.post("/logout").done(function() {
+            window.location.href = "/"
+        });
     });
 
 });

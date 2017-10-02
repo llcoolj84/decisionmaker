@@ -1,7 +1,5 @@
 $(() => {
 
-
-
     function createPollLinks(key) {
 
         var abc = window.location.href;
@@ -11,8 +9,7 @@ $(() => {
         var pollURL = "/poll/" + secondLevelLocation;
         var resultURL = "/history/";
 
-
-        var link1 = $("<a><h2>Link to Poll</h2></a>").attr('href', pollURL);
+        var link1 = $("<a><h2>Link to Poll</h2></a>").attr('href', pollURL).attr("target", "_blank");
         $('#links').append(link1).append('<br>');
 
         // var link2 = $("<a>Link to Results</a>").attr('href', resultURL);
@@ -21,21 +18,14 @@ $(() => {
     }
     createPollLinks();
 
-    var clipboard = new Clipboard('.btn');
+    // \\\\\\MAILGUN/////// \\
 
-    clipboard.on('success', function(e) {
-        console.info('Accion:', e.action);
-        console.info('Texto:', e.text);
-        console.info('Trigger:', e.trigger);
-
-        e.clearSelection();
+    // insert the body of the submit to db using ajax and knex
+    $.ajax({
+        method: "POST",
+        url: "/contact"
+    }).done(function(result) { // .done for ajax HTTP request
+        console.log(result);
     });
-
-    clipboard.on('error', function(e) {
-        console.error('Accion:', e.action);
-        console.error('Trigger:', e.trigger);
-    });
-
-
 
 });
