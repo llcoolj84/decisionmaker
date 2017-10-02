@@ -1,5 +1,7 @@
 # Poll Master App
 
+Go to this link to see a working demo : https://shrouded-sands-25776.herokuapp.com/login
+
 ## Project Setup
 
 Poll Master is a simple, single-page AJAX based polling app that uses jQuery, HTML5 and CSS3. Data is stored using postreSQL
